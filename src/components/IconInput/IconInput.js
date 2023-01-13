@@ -53,7 +53,7 @@ const NativeInput = styled.input`
     font-weight: 700;
     outline-offset: 2px;
     width: calc(100% - 20px);
-    color: ${COLORS.gray700};
+    color: inherit;
     border-bottom: 1px solid black;
 
     &::placeholder {
@@ -62,14 +62,13 @@ const NativeInput = styled.input`
     }
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.label`
     position: relative;
     color: ${COLORS.gray700};
 
-    /* TODO focus and hover effect 
-    ${NativeInput}:focus + & {
-        outline: 5px auto -webkit-focus-ring-color;
-    } */
+    &:hover {
+        color: ${COLORS.black};
+    }
 `;
 
 const IconWrapper = styled.div`

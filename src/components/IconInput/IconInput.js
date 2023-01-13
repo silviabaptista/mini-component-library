@@ -22,10 +22,7 @@ const SIZES = {
 };
 
 const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
-    const [value, setValue] = useState();
     const styles = SIZES[size];
-    const color = value ? COLORS.gray700 : COLORS.gray500;
-    const weight = value ? 700 : 400;
 
     return (
         <Wrapper style={{ "--width": width + "px" }}>
@@ -33,14 +30,10 @@ const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
             <Icon id={icon} strokeWidth={1} size={styles.iconSize} />
             <NativeInput
                 style={{
-                    "--color": color,
-                    "--weight": weight,
                     "--fontSize": styles.fontSize,
                     "--left": styles.left
                 }}
                 placeholder={placeholder}
-                value={value}
-                onInput={e => setValue(e.target.value)}
             ></NativeInput>
         </Wrapper>
     );
@@ -52,10 +45,15 @@ const NativeInput = styled.input`
     top: 0;
     left: var(--left);
     font-size: var(--fontSize);
-    font-weight: var(--weight);
+    font-weight: 700;
     outline: none;
     width: calc(100% - 20px);
-    color: var(--color);
+    color: ${COLORS.gray700};
+
+    &::placeholder {
+        color: ${COLORS.gray500};
+        font-weight: 400;
+    }
 `;
 
 const Wrapper = styled.div`

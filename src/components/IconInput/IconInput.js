@@ -8,13 +8,13 @@ import VisuallyHidden from "../VisuallyHidden";
 
 const SIZES = {
     small: {
-        fontSize: "14px",
+        fontSize: 14,
         border: "1px solid black",
         iconSize: 16,
         left: "22px" //iconsize + some padding
     },
     large: {
-        fontSize: "18px",
+        fontSize: 18,
         border: "2px solid black",
         iconSize: 24,
         left: "28px" //iconsize + some padding
@@ -30,7 +30,7 @@ const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
             <Icon id={icon} strokeWidth={1} size={styles.iconSize} />
             <NativeInput
                 style={{
-                    "--fontSize": styles.fontSize,
+                    "--fontSize": styles.fontSize / 16 + "rem",
                     "--left": styles.left
                 }}
                 placeholder={placeholder}

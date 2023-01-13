@@ -11,13 +11,13 @@ const SIZES = {
         fontSize: 14,
         border: "1px solid black",
         iconSize: 16,
-        left: "22px" //iconsize + some padding
+        height: 24
     },
     large: {
         fontSize: 18,
         border: "2px solid black",
         iconSize: 24,
-        left: "28px" //iconsize + some padding
+        height: 36
     }
 };
 
@@ -25,11 +25,16 @@ const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
     const styles = SIZES[size];
 
     return (
-        <Wrapper style={{ "--width": width + "px" }}>
+        <Wrapper>
             <VisuallyHidden>{label}</VisuallyHidden>
-            <Icon id={icon} strokeWidth={1} size={styles.iconSize} />
+            <IconWrapper style={{ "--size": styles.iconSize + "px" }}>
+                <Icon id={icon} strokeWidth={1} size={styles.iconSize} />
+            </IconWrapper>
+
             <NativeInput
                 style={{
+                    "--width": width + "px",
+                    "--height": styles.height / 16 + "rem",
                     "--fontSize": styles.fontSize / 16 + "rem",
                     "--left": styles.left
                 }}
@@ -40,15 +45,16 @@ const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
 };
 
 const NativeInput = styled.input`
-    position: absolute;
     border: none;
-    top: 0;
-    left: var(--left);
+    width: var(--width);
+    height: var(--height);
+    padding-left: var(--height);
     font-size: var(--fontSize);
     font-weight: 700;
-    outline: none;
+    outline-offset: 2px;
     width: calc(100% - 20px);
     color: ${COLORS.gray700};
+    border-bottom: 1px solid black;
 
     &::placeholder {
         color: ${COLORS.gray500};
@@ -58,15 +64,20 @@ const NativeInput = styled.input`
 
 const Wrapper = styled.div`
     position: relative;
-    border-bottom: 1px solid black;
-    padding-bottom: 6px;
-    width: var(--width);
     color: ${COLORS.gray700};
 
     /* TODO focus and hover effect 
     ${NativeInput}:focus + & {
         outline: 5px auto -webkit-focus-ring-color;
     } */
+`;
+
+const IconWrapper = styled.div`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    height: var(--size);
 `;
 
 export default IconInput;
